@@ -1,0 +1,22 @@
+
+Code for Figure 7.9
+-------------------
+
+from prophet import Prophet 
+import pandas as pd 
+
+# Load historical cost data
+df = pd.read_csv('cloud_costs.csv')
+df['ds'] = pd.to_datetime(df['date'])
+df['y'] = df['cost']
+
+# Train model
+model = Prophet(yearly_seasonality=True, weekly_seasonality=True)
+model.fit(df)
+
+# Predict next quarter
+future = model.make_future_dataframe(periods=90)
+forecast = model.predict(future)
+
+# Plot results
+fig = model.plot(forecast)

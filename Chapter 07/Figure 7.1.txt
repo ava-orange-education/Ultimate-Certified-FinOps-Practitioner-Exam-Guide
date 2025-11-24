@@ -1,0 +1,17 @@
+Code for Figure 7.1
+---------------------
+
+policies:
+- name: tag-untagged-resources
+  resource: aws.*
+  filters:
+    - "tag:Owner": absent
+  actions:
+    - type: tag
+      key: Owner
+      value: "cloud-admin@company.com"
+    - type: notify
+      to: #slack-finops-alerts
+      template: |
+        {account_id}: {resource_type} {resource_id} missing Owner tag.
+        Default tag applied. Review: {link_to_console}

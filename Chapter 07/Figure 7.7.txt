@@ -1,0 +1,5 @@
+Code for Figure 7.7
+-------------------
+
+aws resourcegroupstaggingapi get-resources --tag-filters Key=Environment,
+Values=Production --resources-per-page 10

@@ -1,0 +1,16 @@
+Code for Figure 7.6
+--------------------
+
+- name: Tag game servers
+  hosts: localhost
+  tasks:
+    - name: Apply GameServer tag
+      aws_ec2_tag:
+        region: us-east-1
+        resource: "{{ item.InstanceId }}"
+        tags:
+          Application: GameServer
+          Environment: Production
+          Owner: games-team
+      loop: "{{ ec2_instances }}"
+      when: "'gamesvr' in item.PrivateDnsName"

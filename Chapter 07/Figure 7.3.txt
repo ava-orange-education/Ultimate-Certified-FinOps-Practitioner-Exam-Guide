@@ -1,0 +1,19 @@
+
+#Code in Figure 7.3
+
+policies:
+- name: enforce-required-tags
+  resource: aws.ec2
+  filters:
+    - or:
+      - "tag:Environment": absent
+      - "tag:Owner": absent
+  actions:
+    - type: tag
+      key: ComplianceStatus
+      value: MissingRequiredTags
+    - type: notify
+      template: default
+      subject: "Tagging Policy Violation Detected"
+      to:
+        - CloudOpsTeam@eava.com

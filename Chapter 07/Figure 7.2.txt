@@ -1,0 +1,16 @@
+Code for Figure 7.2
+--------------------
+
+# Enforce mandatory tags in Terraform
+resource "azurerm_resource_group" "example" {
+  name     = "medical-data-rg"
+  location = "East US"
+
+  tags = {
+    project      = var.project_name
+    owner        = var.owner_email
+    compliance   = "HIPAA"
+    environment  = var.environment
+    cost-center  = var.cost_center
+  }
+}

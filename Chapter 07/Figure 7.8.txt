@@ -1,0 +1,17 @@
+Code for Figure 7.8
+--------------------
+
+{
+  "AutoScalingGroupName": "prod-web-servers",
+  "MinSize": 2,
+  "MaxSize": 10,
+  "DesiredCapacity": 4,
+  "TargetTrackingConfigurations": [
+    {
+      "PredefinedMetricSpecification": {
+        "PredefinedMetricType": "ASGAverageCPUUtilization"
+      },
+      "TargetValue": 60.0
+    }
+  ]
+}

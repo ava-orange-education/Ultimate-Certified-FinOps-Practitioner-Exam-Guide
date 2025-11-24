@@ -1,0 +1,21 @@
+Code for Figure 7.4
+---------------------
+
+policies:
+- name: detect-cost-spike
+  resource: aws.ec2
+  description: "Alert when daily EC2 spend exceeds normal thresholds."
+  filters:
+    - type: metrics
+      name: EstimatedCharges
+      namespace: AWS/Billing
+      statistics: Average
+      days: 1
+      op: greater-than
+      value: 500
+  actions:
+    - type: notify
+      template: default
+      subject: "▲ Cost Spike Detected in EC2"
+      to:
+        - FinOpsTeam@ava.com
